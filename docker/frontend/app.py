@@ -1,12 +1,16 @@
 import pandas as pd, os
 
+from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+class Song(BaseModel):
+    songs: list
 
 app = FastAPI()
 
 origins = [
-    "http://localhost:5173",
+    "*",
 ]
 
 app.add_middleware(
@@ -23,7 +27,7 @@ async def root():
     return {"message": "Recommendation"}
 
 @app.post("/get_recommendation")
-def get_recommendation(songs):
+def get_recommendation(songs: Song):
     songs = songs['songs']
     dirname = os.path.dirname(__file__)
     filename = os.path.join(dirname, '../dataset/csv_model.csv')
