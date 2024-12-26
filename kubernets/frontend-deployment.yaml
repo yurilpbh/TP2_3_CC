@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: yuripereira-predictor
-        image: docker pull yurilp/tp2_3:playlist-recommender_0.1
+        image: docker pull yurilp/tp2_3:playlist-recommender_0.2
         ports:
         - containerPort: 52064
