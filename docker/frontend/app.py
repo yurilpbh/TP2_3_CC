@@ -28,7 +28,6 @@ async def root():
 
 @app.post("/get_recommendation")
 def get_recommendation(songs: Song):
-    songs = songs['songs']
     dirname = os.path.dirname(__file__)
     filename = os.path.join(dirname, '../dataset/csv_model.csv')
     df = pd.read_csv(filename)
