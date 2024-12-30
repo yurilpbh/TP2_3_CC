@@ -3,10 +3,14 @@ kind: Deployment
 metadata:
   name: yuripereira-model-predictor-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: yuripereira-model-predictor
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: project2-pv2-yuripereira-pv-claim
   template:
     metadata:
       labels:
@@ -17,3 +21,6 @@ spec:
         image: yurilp/tp2_3:playlist-recommender-model_0.1
         ports:
         - containerPort: 52064
+        volumeMounts:
+        - mountPath: "/home/yuripereira/project2-pv2"
+          name: project2-pv2-yuripereira-pv-storage
