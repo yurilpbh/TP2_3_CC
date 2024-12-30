@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: yuripereira-model-predictor
   volumes:
-    - name: task-pv-storage
+    - name: project2-pv2-yuripereira-pv-storage
       persistentVolumeClaim:
         claimName: project2-pv2-yuripereira-pv-claim
   template:
