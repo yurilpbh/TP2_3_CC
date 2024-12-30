@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yuripereira-model-predictor-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: yuripereira-model-predictor
+  template:
+    metadata:
+      labels:
+        app: yuripereira-model-predictor
+    spec:
+      containers:
+      - name: yuripereira-model-predictor
+        image: yurilp/tp2_3:playlist-recommender-model_0.1
+        ports:
+        - containerPort: 52064
