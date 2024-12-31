@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: yuripereira-model-predictor-deployment
+  namespace: yuripereira
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: yuripereira-model-predictor
-      namespace: yuripereira
   volumes:
     - name: yuripereira-model-predictor-deployment
       persistentVolumeClaim:
