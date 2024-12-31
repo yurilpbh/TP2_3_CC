@@ -5,6 +5,7 @@ metadata:
 spec:
   selector:
     app: yuripereira-predictor
+    namespace: yuripereira
   ports:
     - protocol: TCP
       port: 52064

@@ -7,6 +7,7 @@ spec:
   selector:
     matchLabels:
       app: yuripereira-predictor
+      namespace: yuripereira
   volumes:
     - name: yuripereira-predictor-deployment
       persistentVolumeClaim:
