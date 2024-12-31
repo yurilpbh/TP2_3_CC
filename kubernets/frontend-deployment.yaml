@@ -8,7 +8,7 @@ spec:
     matchLabels:
       app: yuripereira-predictor
   volumes:
-    - name: project2-pv2-yuripereira-pv-storage
+    - name: project2-pv2-yuripereira
       persistentVolumeClaim:
         claimName: project2-pv2-yuripereira-pv-claim
   template:
@@ -23,4 +23,4 @@ spec:
         - containerPort: 52064
         volumeMounts:
         - mountPath: "/home/yuripereira/project2-pv2"
-          name: project2-pv2-yuripereira-pv-storage
+          name: project2-pv2-yuripereira
