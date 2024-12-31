@@ -24,7 +24,7 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Recommendation"}
+    return {"message": "Get recommended songs"}
 
 @app.post("/get_recommendation")
 def get_recommendation(songs: Song):

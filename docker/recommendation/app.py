@@ -4,13 +4,25 @@ from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
 from mlxtend.preprocessing import TransactionEncoder
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
-    return {"message": "Recommendation"}
+    return {"message": "Create a recommendation model"}
 
 def create_recommendation_model(df: pd.DataFrame):
     df = df.filter(items=['album_name','artist_name','duration_ms','pid','track_name'])
@@ -34,14 +46,12 @@ def create_recommendation_model(df: pd.DataFrame):
     sortValues["consequents"] = sortValues["consequents"].apply(lambda x: ', '.join(list(x))).astype("unicode")
     sortValues["consequent support"] = sortValues["consequent support"].apply(lambda x: round(x, 2))
     
-    dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, './csv_model.csv')
+    filename = '/home/datasets/spotify/csv_model.csv'
     sortValues.to_csv(filename)
 
 @app.get("/create_recommendation_model")
 def initialize_recommendation():
-    dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, '../dataset/2023_spotify_ds1.csv.csv')
+    filename = '/home/datasets/spotify/2023_spotify_ds1.csv'
     with open(filename, encoding="utf8") as file:
         df = pd.read_csv(file)
     
@@ -49,8 +59,7 @@ def initialize_recommendation():
 
 @app.get("/update_recommendation_model")
 def retrain_recommendation():
-    dirname = os.path.dirname(__file__)
-    filename = os.path.join(dirname, '../dataset/2023_spotify_ds2.csv.csv')
+    filename = '/home/datasets/spotify/2023_spotify_ds2.csv'
     with open(filename, encoding="utf8") as file:
         df = pd.read_csv(file)
 
