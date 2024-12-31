@@ -10,7 +10,7 @@ spec:
   volumes:
     - name: project2-pv2-yuripereira
       persistentVolumeClaim:
-        claimName: project2-pv2-yuripereira-pv-claim
+        claimName: project2-pv2-yuripereira
   template:
     metadata:
       labels:
@@ -22,5 +22,5 @@ spec:
         ports:
         - containerPort: 52064
         volumeMounts:
-        - mountPath: "/home/yuripereira/project2-pv2"
-          name: project2-pv2-yuripereira
+        - name: project2-pv2-yuripereira
+          mountPath: "/home/yuripereira/project2-pv2"

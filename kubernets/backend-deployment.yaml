@@ -10,7 +10,7 @@ spec:
   volumes:
     - name: project2-pv2-yuripereira
       persistentVolumeClaim:
-        claimName: project2-pv2-yuripereira-pv-claim
+        claimName: project2-pv2-yuripereira
   template:
     metadata:
       labels:
