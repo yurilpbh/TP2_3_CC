@@ -8,10 +8,6 @@ spec:
   selector:
     matchLabels:
       app: yuripereira-predictor
-  volumes:
-    - name: yuripereira-predictor-deployment
-      persistentVolumeClaim:
-        claimName: project2-pv2-yuripereira
   template:
     metadata:
       labels:
@@ -25,3 +21,7 @@ spec:
         volumeMounts:
         - name: yuripereira-predictor-deployment
           mountPath: "/home/yuripereira/project2-pv2"
+    volumes:
+    - name: yuripereira-predictor-deployment
+      persistentVolumeClaim:
+        claimName: project2-pv2-yuripereira
