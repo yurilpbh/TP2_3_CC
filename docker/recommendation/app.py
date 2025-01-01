@@ -43,7 +43,7 @@ def create_recommendation_model(df: pd.DataFrame):
     transactions_df = pd.DataFrame.sparse.from_spmatrix(te_ary, columns=te.columns_)
     print('transactions_df')
     
-    frequent_itemsets = apriori(transactions_df, use_colnames=True, min_support=0.07, max_len=2)
+    frequent_itemsets = apriori(transactions_df, use_colnames=True, min_support=0.1, max_len=2)
     print('frequent_itemsets')
     rules = association_rules(frequent_itemsets, num_itemsets=len(frequent_itemsets), metric="lift")
     print('rules')
