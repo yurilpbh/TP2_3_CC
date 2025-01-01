@@ -43,7 +43,7 @@ def create_recommendation_model(df: pd.DataFrame):
     transactions_df = pd.DataFrame.sparse.from_spmatrix(te_ary, columns=te.columns_)
     print('transactions_df')
     
-    frequent_itemsets = apriori(transactions_df, use_colnames=True, min_support=0.1, max_len=2)
+    frequent_itemsets = apriori(transactions_df, use_colnames=True, min_support=0.05, max_len=2)
     print('frequent_itemsets')
     rules = association_rules(frequent_itemsets, num_itemsets=len(frequent_itemsets), metric="lift")
     print('rules')
@@ -60,15 +60,15 @@ def create_recommendation_model(df: pd.DataFrame):
 
 @app.get("/create_recommendation_model")
 def initialize_recommendation():
-    try:
-        filename = '/home/yuripereira/project2-pv2/2023_spotify_ds1.csv'
-        with open(filename, encoding="utf8") as file:
-            df = pd.read_csv(file)
-        
-        create_recommendation_model(df)
-    except:
-        return 'Error creating recommendation model'
-    return 'Sucess creating recommendation model'
+    filename = '/home/yuripereira/project2-pv2/2023_spotify_ds1.csv'
+    with open(filename, encoding="utf8") as file:
+        df = pd.read_csv(file)
+    
+    create_recommendation_model(df)
+    # except:
+    #     return 'Error creating recommendation model'
+    # return 'Sucess creating recommendation model'
+    return ''
 
 @app.get("/update_recommendation_model")
 def retrain_recommendation():
