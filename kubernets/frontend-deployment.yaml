@@ -5,8 +5,8 @@ metadata:
   namespace: yuripereira
   annotations:
     argocd-image-updater.argoproj.io/image-list: yurilp/tp2_3
-    argocd-image-updater.argoproj.io/yurilp/tp2_3.update-strategy: custom
-    argocd-image-updater.argoproj.io/yurilp/tp2_3.custom-tag-pattern: "^playlist-recommender__(\\d+\\.\\d+\\.\\d+)$"
+    argocd-image-updater.argoproj.io/yurilp_tp2_3.update-strategy: custom
+    argocd-image-updater.argoproj.io/yurilp_tp2_3.custom-tag-pattern: "^playlist-recommender_(\\d+\\.\\d+\\.\\d+)$"
 spec:
   replicas: 1
   selector:
