@@ -20,7 +20,7 @@ spec:
         - containerPort: 52064
         volumeMounts:
         - name: yuripereira-predictor-deployment
-          mountPath: "/app/dataset"
+          mountPath: "/data"
       volumes:
       - name: yuripereira-predictor-deployment
         persistentVolumeClaim:
