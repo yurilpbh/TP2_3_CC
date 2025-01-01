@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: yuripereira-model-predictor-deployment
   namespace: yuripereira
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: yurilp/tp2_3
+    argocd-image-updater.argoproj.io/yurilp/tp2_3.update-strategy: custom
+    argocd-image-updater.argoproj.io/yurilp/tp2_3.custom-tag-pattern: "^playlist-recommender-model_(\\d+\\.\\d+\\.\\d+)$"
 spec:
   replicas: 1
   selector:
@@ -15,7 +19,7 @@ spec:
     spec:
       containers:
       - name: yuripereira-model-predictor
-        image: yurilp/tp2_3:playlist-recommender-model_0.2
+        image: yurilp/tp2_3:playlist-recommender-model_0.0.1
         ports:
         - containerPort: 52064
         volumeMounts:
