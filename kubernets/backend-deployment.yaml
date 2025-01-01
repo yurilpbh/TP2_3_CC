@@ -21,6 +21,8 @@ spec:
         volumeMounts:
         - name: yuripereira-model-predictor-deployment
           mountPath: "/home/yuripereira/project2-pv2"
+        - name: spotify-dataset
+          mountPath: "/home/datasets/spotify/"
       volumes:
       - name: yuripereira-model-predictor-deployment
         persistentVolumeClaim:
