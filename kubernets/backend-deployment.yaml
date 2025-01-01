@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: yuripereira-model-predictor
-        image: yurilp/tp2_3:playlist-recommender-model_0.0.5
+        image: yurilp/tp2_3:playlist-recommender-model_0.0.6
         ports:
         - containerPort: 52064
         volumeMounts:
