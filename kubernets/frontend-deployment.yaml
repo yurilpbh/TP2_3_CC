@@ -3,10 +3,6 @@ kind: Deployment
 metadata:
   name: yuripereira-predictor-deployment
   namespace: yuripereira
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: yuripereira=yurilp/tp2_3
-    argocd-image-updater.argoproj.io/yuripereira.update-strategy: custom
-    argocd-image-updater.argoproj.io/yuripereira.custom-tag-pattern: "^playlist-recommender-model_(\\d+\\.\\d+\\.\\d+)$"
 spec:
   replicas: 1
   selector:
