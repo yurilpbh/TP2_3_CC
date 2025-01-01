@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: project2-pv2-yuripereira
+  namespace: yuripereira
 spec:
   storageClassName: default-storage-class-yuripereira
   accessModes:
