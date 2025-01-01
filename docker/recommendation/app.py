@@ -47,20 +47,29 @@ def create_recommendation_model(df: pd.DataFrame):
     sortValues["consequent support"] = sortValues["consequent support"].apply(lambda x: round(x, 2))
     
     filename = '/home/yuripereira/project2-pv2/csv_model.csv'
+    print(sortValues.iloc[:5])
     sortValues.to_csv(filename)
 
 @app.get("/create_recommendation_model")
 def initialize_recommendation():
-    filename = '/home/yuripereira/project2-pv2/2023_spotify_ds1.csv'
-    with open(filename, encoding="utf8") as file:
-        df = pd.read_csv(file)
-    
-    create_recommendation_model(df)
+    try:
+        filename = '/home/yuripereira/project2-pv2/2023_spotify_ds1.csv'
+        with open(filename, encoding="utf8") as file:
+            df = pd.read_csv(file)
+        
+        create_recommendation_model(df)
+    except:
+        return 'Error creating recommendation model'
+    return 'Sucess creating recommendation model'
 
 @app.get("/update_recommendation_model")
 def retrain_recommendation():
-    filename = '/home/yuripereira/project2-pv2/2023_spotify_ds2.csv'
-    with open(filename, encoding="utf8") as file:
-        df = pd.read_csv(file)
+    try:
+        filename = '/home/yuripereira/project2-pv2/2023_spotify_ds2.csv'
+        with open(filename, encoding="utf8") as file:
+            df = pd.read_csv(file)
 
-    create_recommendation_model(df)
+        create_recommendation_model(df)
+    except:
+        return 'Error re-training recommendation model'
+    return 'Sucess re-training recommendation model'
