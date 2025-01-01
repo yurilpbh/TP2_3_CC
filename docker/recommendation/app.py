@@ -46,12 +46,12 @@ def create_recommendation_model(df: pd.DataFrame):
     sortValues["consequents"] = sortValues["consequents"].apply(lambda x: ', '.join(list(x))).astype("unicode")
     sortValues["consequent support"] = sortValues["consequent support"].apply(lambda x: round(x, 2))
     
-    filename = '/home/datasets/spotify/csv_model.csv'
+    filename = '/home/yuripereira/project2-pv2/csv_model.csv'
     sortValues.to_csv(filename)
 
 @app.get("/create_recommendation_model")
 def initialize_recommendation():
-    filename = '/home/datasets/spotify/2023_spotify_ds1.csv'
+    filename = '/home/yuripereira/project2-pv2/2023_spotify_ds1.csv'
     with open(filename, encoding="utf8") as file:
         df = pd.read_csv(file)
     
@@ -59,7 +59,7 @@ def initialize_recommendation():
 
 @app.get("/update_recommendation_model")
 def retrain_recommendation():
-    filename = '/home/datasets/spotify/2023_spotify_ds2.csv'
+    filename = '/home/yuripereira/project2-pv2/2023_spotify_ds2.csv'
     with open(filename, encoding="utf8") as file:
         df = pd.read_csv(file)
 
