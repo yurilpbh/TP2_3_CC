@@ -72,3 +72,6 @@ def retrain_recommendation():
     except:
         return 'Error re-training recommendation model'
     return 'Sucess re-training recommendation model'
+
+if __name__ == '__main__':
+    app.run(debug=True)
