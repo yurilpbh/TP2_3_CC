@@ -51,15 +51,15 @@ def create_recommendation_model(df: pd.DataFrame):
 
 @app.get("/create_recommendation_model")
 def initialize_recommendation():
-    filename = '/dataset/2023_spotify_ds1.csv'
-    with open(filename, encoding="utf8") as file:
-        df = pd.read_csv(file)
-    print(df.iloc[:3])
-    create_recommendation_model(df)
-    # except:
-    #     return 'Error creating recommendation model'
-    # return 'Sucess creating recommendation model'
-    return ''
+    try:
+        filename = '/dataset/2023_spotify_ds1.csv'
+        with open(filename, encoding="utf8") as file:
+            df = pd.read_csv(file)
+        
+        create_recommendation_model(df)
+    except:
+        return 'Error creating recommendation model'
+    return 'Sucess creating recommendation model'
 
 @app.get("/update_recommendation_model")
 def retrain_recommendation():
