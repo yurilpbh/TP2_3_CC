@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: yuripereira-predictor
-        image: yurilp/tp2_3:playlist-recommender_0.0.4
+        image: quay.io/yurilpbh/tp2_server:latest
         ports:
         - containerPort: 52064
         volumeMounts:
