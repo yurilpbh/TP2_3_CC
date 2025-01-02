@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
       - name: yuripereira-model-predictor
-        image: yurilp/tp2_3:playlist-recommender-model_0.0.15
+        image: yurilp/tp2_3:playlist-recommender-model_0.0.16
         ports:
         - containerPort: 52064
         volumeMounts:
         - name: yuripereira-model-predictor-deployment
-          mountPath: "/data"
+          mountPath: "/dataset"
       volumes:
       - name: yuripereira-model-predictor-deployment
         persistentVolumeClaim:
