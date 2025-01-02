@@ -32,6 +32,7 @@ def get_recommendation(songs: Song):
     df = pd.read_csv(filename)
     songs_recommendation = []
     df_recommendation = pd.DataFrame()
+    print(songs)
     for song in songs:
         df_songs = df[df['antecedents'].str.lower() == song.lower()]
         df_recommendation = pd.concat([df_recommendation, df_songs])
