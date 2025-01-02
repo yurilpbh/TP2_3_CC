@@ -48,4 +48,4 @@ COPY . .
 EXPOSE 52064
 
 # Run the application.
-CMD ["uvicorn", "app:app", "--host=0.0.0.0", "--port=3000"]
+CMD ["python", "app.py"]
