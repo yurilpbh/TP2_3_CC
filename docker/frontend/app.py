@@ -49,7 +49,7 @@ def get_recommendation(data: Song):
         common_elements.update(df.sort_values('consequent support', ascending=False)['consequents'][0:(5-len(common_elements))].to_list())
 
     return {
-        "songs": songs,
+        "songs": common_elements,
         "version": 1,
         "model_date": "2024-12-12",
     }
