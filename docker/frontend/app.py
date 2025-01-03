@@ -27,19 +27,12 @@ async def root():
     return {"message": "Get recommended songs"}
 
 @app.post("/get_recommendation")
-def get_recommendation(songs: Song):
+def get_recommendation(data: Song):
     filename = '/dataset/csv_model.csv'
     df = pd.read_csv(filename)
     songs_recommendation = []
     df_recommendation = pd.DataFrame()
-    try:
-        print(songs)
-        print(songs.songs)
-        print(songs.replace('songs=[', ''))
-        print(songs.replace('songs=[', '').replace(']', ''))
-        print(songs.replace('songs=[', '').replace(']', '').split(','))
-    except:
-        pass
+    songs = data.songs
     
     for song in songs:
         df_songs = df[df['antecedents'].str.lower() == song.lower()]
