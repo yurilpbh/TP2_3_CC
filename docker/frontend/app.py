@@ -63,7 +63,7 @@ def get_recommendation(data: Song):
             }
     else:
         return {
-            "songs": common_elements[0:5],
+            "songs": list(common_elements)[0:5],
             "version": 1,
             "model_date": "2024-12-12",
         }
