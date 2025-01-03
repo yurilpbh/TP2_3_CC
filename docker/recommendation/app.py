@@ -38,7 +38,7 @@ def create_recommendation_model(df: pd.DataFrame):
     te_ary = te.fit(itemSetList).transform(itemSetList, sparse=True)
     transactions_df = pd.DataFrame.sparse.from_spmatrix(te_ary, columns=te.columns_)
     
-    frequent_itemsets = apriori(transactions_df, use_colnames=True, min_support=0.1, max_len=2)
+    frequent_itemsets = apriori(transactions_df, use_colnames=True, min_support=0.05, max_len=2, low_memory=True)
     rules = association_rules(frequent_itemsets, num_itemsets=len(frequent_itemsets), metric="lift")
     supports = rules[rules['consequent support'] >= 0.1][['antecedents', 'consequents', 'consequent support']]
     sortValues = supports.sort_values(by='consequent support', ascending=False).reset_index()

@@ -4,8 +4,10 @@ from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+
 class Song(BaseModel):
     songs: list
+
 
 app = FastAPI()
 
@@ -26,33 +28,45 @@ app.add_middleware(
 async def root():
     return {"message": "Get recommended songs"}
 
+
 @app.post("/get_recommendation")
 def get_recommendation(data: Song):
+    songs = data.songs
     filename = '/dataset/csv_model.csv'
     df = pd.read_csv(filename)
     songs_recommendation = []
     df_recommendation = pd.DataFrame()
-    songs = data.songs
-    
+    songs_choosed = []
     for song in songs:
-        df_songs = df[df['antecedents'].str.lower() == song.lower()]
+        song = song.lower()
+        df_songs = df[df['antecedents'].str.lower() == song]
         df_recommendation = pd.concat([df_recommendation, df_songs])
         songs_recommendation.append(df_songs['consequents'].tolist())
+        songs_choosed.append(song)
     
     # Use set intersection to find common elements
     common_elements = set(songs_recommendation[0])
     for sublist in songs_recommendation[1:]:
         common_elements &= set(sublist)
-    
+        
+    for song in common_elements:
+        songs_choosed.append(song.lower())
+        
     if len(common_elements) < 5:
-        df = df[~df['consequents'].str.lower().isin(songs)]
-        common_elements.update(df.sort_values('consequent support', ascending=False)['consequents'][0:(5-len(common_elements))].to_list())
+        df = df[~df['consequents'].str.lower().isin(songs_choosed)]
+        common_elements.update(df.sort_values('consequent support', ascending=False)['consequents'].drop_duplicates()[0:(5-len(common_elements))].to_list())
 
-    return {
-        "songs": common_elements,
-        "version": 1,
-        "model_date": "2024-12-12",
-    }
+        return {
+                "songs": common_elements,
+                "version": 1,
+                "model_date": "2024-12-12",
+            }
+    else:
+        return {
+            "songs": common_elements[0:5],
+            "version": 1,
+            "model_date": "2024-12-12",
+        }
 
 
 if __name__ == '__main__':
