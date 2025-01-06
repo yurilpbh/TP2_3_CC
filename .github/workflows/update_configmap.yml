@@ -27,7 +27,7 @@ jobs:
 
     - name: Update ConfigMap
       run: |
-        cd Kubernetes
+        cd kubernetes
         kubectl create configmap spotify-dataset \
           --namespace yuripereira \
           --from-file="./../../dataset/spotify_ds.csv" \
