@@ -2,8 +2,8 @@ name: Update ConfigMap with CSV
 
 on:
   push:
-    paths:
-      - "dataset/spotify_ds.csv"
+    # paths:
+    #   - "dataset/spotify_ds.csv"
 
 jobs:
   update-configmap:
@@ -27,7 +27,7 @@ jobs:
 
     - name: Update ConfigMap
       run: |
-        cd kubernetes
+        ls
         kubectl create configmap spotify-dataset \
           --namespace yuripereira \
           --from-file="./../../dataset/spotify_ds.csv" \
