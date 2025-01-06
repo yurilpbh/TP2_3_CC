@@ -31,4 +31,4 @@ jobs:
         kubectl create configmap spotify-dataset \
           --namespace yuripereira \
           --from-file="../dataset/spotify_ds.csv" \
-          --dry-run=client -o yaml | kubectl apply -f -
+          --dry-run=client --validate=false -o yaml | kubectl apply -f -
