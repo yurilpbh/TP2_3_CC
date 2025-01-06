@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: yuripereira-model-predictor
+      annotations:
+        configmap-hash: "{{ .ConfigMap | sha256sum }}"
     spec:
       containers:
       - name: yuripereira-model-predictor
@@ -25,3 +27,5 @@ spec:
       - name: yuripereira-model-predictor-deployment
         persistentVolumeClaim:
           claimName: project2-pv2-yuripereira
+        configMap:
+          name: spotify-dataset
