@@ -12,8 +12,6 @@ spec:
     metadata:
       labels:
         app: yuripereira-model-predictor
-      annotations:
-        configmap-hash: "{{ .Values.spotify-configmap.data.spotify_sha256 }}"
     spec:
       containers:
       - name: yuripereira-model-predictor
