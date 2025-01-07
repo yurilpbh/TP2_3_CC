@@ -13,7 +13,7 @@ spec:
       labels:
         app: yuripereira-model-predictor
       annotations:
-        configmap-hash: "{{ .ConfigMap | sha256sum }}"
+        configmap-hash: "{{ .Values.spotify-configmap.data.csv_hash }}"
     spec:
       containers:
       - name: yuripereira-model-predictor
