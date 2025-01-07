@@ -23,9 +23,13 @@ spec:
         volumeMounts:
         - name: yuripereira-model-predictor-deployment
           mountPath: "/dataset"
+        - name: yuripereira-spotify-dataset
+          mountPath: "/dataset"
+          subPath: spotify_ds.csv
       volumes:
       - name: yuripereira-model-predictor-deployment
         persistentVolumeClaim:
           claimName: project2-pv2-yuripereira
+      - name: yuripereira-spotify-dataset
         configMap:
           name: spotify-configmap

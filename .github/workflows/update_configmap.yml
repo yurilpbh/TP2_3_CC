@@ -25,14 +25,6 @@ jobs:
         echo "${KUBE_CONFIG_DATA}" > kubeconfig
         export KUBECONFIG=kubeconfig
 
-    # - name: Update ConfigMap
-    #   run: |
-    #     cd kubernets
-    #     kubectl create configmap spotify-dataset \
-    #       --namespace yuripereira \
-    #       --from-file="../dataset/spotify_ds.csv" \
-    #       --dry-run=client -o yaml | kubectl apply --validate=false -f -
-
     - name: Update ConfigMap YAML
       run: |
         # Read the CSV content and encode it for the ConfigMap
