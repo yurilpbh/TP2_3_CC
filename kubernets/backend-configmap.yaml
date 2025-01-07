@@ -4,4 +4,4 @@ metadata:
   name: spotify-configmap
   namespace: yuripereira
 data:
-  spotify_sha256: 42178827e70f95cc5f59de9536f8661b3cfcb547f7d3ec9c37bc9febc03a7bd4
+  spotify_sha256: f34bcbe8fb116325110b943f01efe5914100ece5947159cc419b37d91aea0973
