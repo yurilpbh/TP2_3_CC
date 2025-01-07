@@ -7,7 +7,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap: "{{ .Values.csv-configmap.data.csv_hash }}" # Track the hash
+        checksum/configmap: "{{ .Values.spotify-configmap.data.spotify_sha256 }}" # Track the hash
     spec:
       containers:
       - name: yuripereira-model-predictor-job-container
