@@ -11,10 +11,10 @@ spec:
       - name: yuripereira-model-predictor-job-container
         image: quay.io/yurilpbh/tp2:v0.0.22
         volumeMounts:
-        - name: yuripereira-model-predictor-deployment
+        - name: yuripereira-model-predictor-job
           mountPath: "/dataset"
       volumes:
-      - name: yuripereira-model-predictor-deployment
+      - name: yuripereira-model-predictor-job
         persistentVolumeClaim:
           claimName: project2-pv2-yuripereira
       restartPolicy: Never
