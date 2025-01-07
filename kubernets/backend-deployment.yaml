@@ -28,4 +28,4 @@ spec:
         persistentVolumeClaim:
           claimName: project2-pv2-yuripereira
         configMap:
-          name: spotify-dataset
+          name: spotify-configmap

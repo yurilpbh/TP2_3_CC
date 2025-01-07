@@ -25,10 +25,38 @@ jobs:
         echo "${KUBE_CONFIG_DATA}" > kubeconfig
         export KUBECONFIG=kubeconfig
 
-    - name: Update ConfigMap
+    # - name: Update ConfigMap
+    #   run: |
+    #     cd kubernets
+    #     kubectl create configmap spotify-dataset \
+    #       --namespace yuripereira \
+    #       --from-file="../dataset/spotify_ds.csv" \
+    #       --dry-run=client -o yaml | kubectl apply --validate=false -f -
+
+    - name: Update ConfigMap YAML
       run: |
-        cd kubernets
-        kubectl create configmap spotify-dataset \
-          --namespace yuripereira \
-          --from-file="../dataset/spotify_ds.csv" \
-          --dry-run=client -o yaml | kubectl apply --validate=false -f -
+        # Read the CSV content and encode it for the ConfigMap
+        csv_data=$(cat dataset/spotify_ds.csv | sed 's/^/    /')
+
+        # Update the ConfigMap YAML file
+        cat <<EOF > kubernets/backend-configmap.yaml
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: spotify-configmap
+          namespace: yuripereira
+        data:
+          spotify.csv: |
+            $csv_data
+        EOF
+      
+    - name: Commit and Push Changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global user.name "GitHub Actions Bot"
+        git config --global user.email "actions@github.com"
+        git add kubernetes/bakend-configmap.yaml
+        git commit -m "Update ConfigMap with latest spotify_ds.csv"
+        git push
+      
