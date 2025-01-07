@@ -20,7 +20,7 @@ spec:
         ports:
         - containerPort: 52064
         volumeMounts:
-        - name: yuripereira-model-predictor-deployment
+          name: yuripereira-model-predictor-deployment
           mountPath: "/dataset"
       volumes:
       - name: yuripereira-model-predictor-deployment
