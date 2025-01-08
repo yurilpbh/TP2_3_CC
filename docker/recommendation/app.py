@@ -1,4 +1,4 @@
-import pandas as pd
+import pandas as pd, json, os
 
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
@@ -42,6 +42,17 @@ def create_recommendation_model(df: pd.DataFrame):
     sortValues["consequent support"] = sortValues["consequent support"].apply(
         lambda x: round(x, 2)
     )
+
+    version_file = '/dataset/model_version.json'
+    if os.path.isfile(version_file):
+        with open(version_file, 'r') as file:
+            json_version = json.load(file)
+            json_version['version'] += 1
+    else:
+        json_version = {'version': 1}
+
+    with open(version_file, 'w') as file:
+        json.dump(json_version, file)
 
     filename = '/dataset/csv_model.csv'
     sortValues.to_csv(filename)

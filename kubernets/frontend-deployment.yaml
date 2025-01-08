@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: yuripereira-predictor
-        image: quay.io/yurilpbh/tp2_server:v0.0.10
+        image: quay.io/yurilpbh/tp2_server:v0.0.11
         ports:
         - containerPort: 52064
         volumeMounts:

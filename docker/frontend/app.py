@@ -1,4 +1,4 @@
-import pandas as pd, os
+import pandas as pd, os, json, datetime
 
 from pydantic import BaseModel
 from fastapi import FastAPI
@@ -33,6 +33,14 @@ async def root():
 def get_recommendation(data: Song):
     songs = data.songs
     filename = '/dataset/csv_model.csv'
+    if os.path.isfile(filename):
+        file_date = os.path.getctime(filename)
+        file_date = datetime.date.fromtimestamp(file_date)
+    version_file = '/dataset/model_version.json'
+    version = 0
+    with open(version_file, 'r') as file:
+        json_version = json.load(file)
+        version = json_version['version']
     df = pd.read_csv(filename)
     songs_recommendation = []
     df_recommendation = pd.DataFrame()
@@ -58,14 +66,14 @@ def get_recommendation(data: Song):
 
         return {
                 "songs": common_elements,
-                "version": 1,
-                "model_date": "2024-12-12",
+                "version": version,
+                "model_date": file_date,
             }
     else:
         return {
             "songs": list(common_elements)[0:5],
-            "version": 1,
-            "model_date": "2024-12-12",
+            "version": version,
+            "model_date": file_date,
         }
 
 

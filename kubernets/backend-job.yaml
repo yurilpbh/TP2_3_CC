@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
       - name: yuripereira-model-predictor-job-container
-        image: quay.io/yurilpbh/tp2:v0.0.22
+        image: quay.io/yurilpbh/tp2:v0.0.23
         volumeMounts:
         - name: yuripereira-model-predictor-job-f34bcbe8fb
           mountPath: "/dataset"
