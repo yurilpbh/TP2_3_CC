@@ -3,7 +3,7 @@ name: Update ConfigMap with sha256 of CSV
 on:
   push:
     paths:
-      - "dataset/spotify_ds.csv"
+      - "recommendation/spotify_ds.csv"
 
 jobs:
   update-configmap:
