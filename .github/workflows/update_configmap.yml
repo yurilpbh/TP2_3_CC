@@ -3,7 +3,7 @@ name: Update ConfigMap with sha256 of CSV
 on:
   push:
     paths:
-      - "recommendation/spotify_ds.csv"
+      - "dataset/spotify_ds.csv"
 
 jobs:
   update-configmap:
@@ -19,14 +19,9 @@ jobs:
         csv_hash=$(sha256sum dataset/spotify_ds.csv | awk '{print $1}')
 
         # Update the ConfigMap YAML file
-        cat <<EOF > kubernets/backend-configmap.yaml
-        apiVersion: v1
-        kind: ConfigMap
-        metadata:
-          name: spotify-configmap
-          namespace: yuripereira
-        data:
-          spotify_sha256: $csv_hash
+        cat <<EOF > kubernets/values.yaml
+        checksum:
+          configmap: $csv_hash
         EOF
       
     - name: Commit and Push Changes
