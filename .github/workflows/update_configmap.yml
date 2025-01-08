@@ -30,7 +30,7 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
-        git add kubernets/backend-configmap.yaml
+        git add kubernets/values.yaml
         git commit -m "Update ConfigMap with sha256 of spotify_ds.csv"
         git push
       
