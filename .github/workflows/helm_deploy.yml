@@ -1,4 +1,4 @@
-name: Update ConfigMap with sha256 of CSV
+name: Executing helm to re-start the job pod
 
 on:
   push:
