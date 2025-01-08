@@ -2,8 +2,8 @@ name: Update ConfigMap with sha256 of CSV
 
 on:
   push:
-    # paths:
-    #   - "dataset/spotify_ds.csv"
+    paths:
+      - "dataset/spotify_ds.csv"
 
 jobs:
   update-configmap:
@@ -19,9 +19,27 @@ jobs:
         csv_hash=$(sha256sum dataset/spotify_ds.csv | awk '{print $1}')
 
         # Update the ConfigMap YAML file
-        cat <<EOF > kubernets/values.yaml
-        checksum:
-          configmap: $csv_hash
+        cat <<EOF > kubernets/backend-job.yaml
+        apiVersion: batch/v1
+        kind: Job
+        metadata:
+          name: yuripereira-model-predictor-job-$csv_hash
+          namespace: yuripereira
+        spec:
+          template:
+            spec:
+              containers:
+              - name: yuripereira-model-predictor-job-container
+                image: quay.io/yurilpbh/tp2:v0.0.22
+                volumeMounts:
+                - name: yuripereira-model-predictor-job-$csv_hash
+                  mountPath: "/dataset"
+              volumes:
+              - name: yuripereira-model-predictor-job-$csv_hash
+                persistentVolumeClaim:
+                  claimName: project2-pv2-yuripereira
+              restartPolicy: Never
+          backoffLimit: 1
         EOF
       
     - name: Commit and Push Changes
@@ -30,7 +48,7 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
-        git add kubernets/values.yaml
+        git add kubernets/backend-job.yaml
         git commit -m "Update ConfigMap with sha256 of spotify_ds.csv"
         git push
       

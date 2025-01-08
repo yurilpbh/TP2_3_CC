@@ -5,9 +5,6 @@ metadata:
   namespace: yuripereira
 spec:
   template:
-    metadata:
-      annotations:
-        checksum/configmap: "{{ .Values.checksum.configmap }}" # Track the hash
     spec:
       containers:
       - name: yuripereira-model-predictor-job-container
