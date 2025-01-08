@@ -16,7 +16,7 @@ jobs:
     - name: Update ConfigMap YAML
       run: |
         # Read the CSV content and encode it for the ConfigMap
-        csv_hash=$(sha256sum dataset/spotify_ds.csv | awk '{print $1}')[0:10]
+        csv_hash=$(sha256sum dataset/spotify_ds.csv | awk '{print $1:0:10}')
 
         # Update the ConfigMap YAML file
         cat <<EOF > kubernets/backend-job.yaml
