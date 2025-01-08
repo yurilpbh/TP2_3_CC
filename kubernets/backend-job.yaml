@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: yuripereira-model-predictor-job-42178827e70f95cc5f59de9536f8661b3cfcb547f7d3ec9c37bc9febc03a7bd4
+  name: yuripereira-model-predictor-job-42178827e70f95cc5f59de9536f8661b3cfcb547f7d3ec9c37bc9febc03a7bd4[0:10]
   namespace: yuripereira
 spec:
   template:
@@ -10,10 +10,10 @@ spec:
       - name: yuripereira-model-predictor-job-container
         image: quay.io/yurilpbh/tp2:v0.0.22
         volumeMounts:
-        - name: yuripereira-model-predictor-job-42178827e70f95cc5f59de9536f8661b3cfcb547f7d3ec9c37bc9febc03a7bd4
+        - name: yuripereira-model-predictor-job-42178827e70f95cc5f59de9536f8661b3cfcb547f7d3ec9c37bc9febc03a7bd4[0:10]
           mountPath: "/dataset"
       volumes:
-      - name: yuripereira-model-predictor-job-42178827e70f95cc5f59de9536f8661b3cfcb547f7d3ec9c37bc9febc03a7bd4
+      - name: yuripereira-model-predictor-job-42178827e70f95cc5f59de9536f8661b3cfcb547f7d3ec9c37bc9febc03a7bd4[0:10]
         persistentVolumeClaim:
           claimName: project2-pv2-yuripereira
       restartPolicy: Never
