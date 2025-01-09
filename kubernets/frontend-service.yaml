@@ -10,3 +10,5 @@ spec:
     - protocol: TCP
       port: 52064
       targetPort: 52064
+      nodePort: 52064
+  type: NodePort
