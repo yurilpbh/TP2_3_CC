@@ -4,7 +4,7 @@ metadata:
   name: yuripereira-predictor-deployment
   namespace: yuripereira
 spec:
-  replicas: 1
+  replicas: 5
   revisionHistoryLimit: 1
   selector:
     matchLabels:
